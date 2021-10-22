@@ -1,0 +1,91 @@
+- git init  : Initialized empty Git repository
+
+- git add . : Add all files and folders
+
+- git checkout -b begin : Create new branch
+
+- git branch
+
+- git push -u origin begin:
+- git push -u origin master:
+
+- php artisan config:cache : Clear cache
+
+
+Packages:
+
+Translate  for site:
+composer require astrotomic/laravel-translatable:11.8.3
+
+Localization  for admin:
+composer require mcamara/laravel-localization
+php artisan vendor:publish --provider="Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider"
+
+DataTables:
+composer require yajra/laravel-datatables-oracle:"~9.0"
+
+
+
+
+
+
+
+
+
+
+Create Table:
+- php artisan make:migration create_admins_table --create="admins"
+Applay Migration:
+- php artisan migrate
+
+Create Model:
+- php artisan make:model Models\Admin
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Server error 500 when accessing Laravel :
+-------------
+in terminal:
+
+cp .env.example .env
+php artisan key:generate
+chmod 777 -R  storage
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+php artisan migrate error:
+Illuminate\Database\QueryException
+SQLSTATE[HY000] [2002] Connection refused
+(SQL: select * from information_schema.tables where
+table_schema = stores and table_name = migrations and table_type = 'BASE TABLE')
+-------------
+in config/database.php add Mamp socket:
+'mysql' => [
+            'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock',
+]
+https://stackoverflow.com/questions/56550615/connection-refused-to-mysql-on-laravel-and-mamp
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Auth:
+    »Step1:
+        - Add Guard in /config/auth.php
+        - Add Middleware in /routes/admin.php
+        - Add Admin by run tinker
+            >>> php artisan tinker
+                $admin = new App\Models\Admin();
+                $admin -> name = "hs777it";
+                $admin -> email = "hs777it@gmail.com";
+                $admin -> password = bcrypt("12345678");
+                $admin -> save();
+    »Step2:
+        - Make LoginController
+            >>> php artisan make:controller Dashboard/LoginController
+    »Step3:
+        - Make Validation
+            >>> php artisan make:request AdminLoginRequest
+
+@csrf
+لاي ملف روت غير API
+لارافيل عامل اجباري ميدلوير لازم يتشيك علي التوكين
+@csrf
+
