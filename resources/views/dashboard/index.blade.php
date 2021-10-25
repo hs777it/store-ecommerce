@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <canvas id="xrp-chartjs" class="height-75"></canvas>
+                                        <canvas id="cust-chartjs" class="height-75"></canvas>
                                     </div>
                                 </div>
                             </div>

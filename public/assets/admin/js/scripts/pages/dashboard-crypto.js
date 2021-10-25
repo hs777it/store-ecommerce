@@ -150,6 +150,74 @@
     var ETHAreaChart = new Chart(ethChartjs, ETHCardconfig);
 
     /********************************************
+    *               Customer Card                    *
+    ********************************************/
+    //Get the context of the Chart canvas element we want to select
+    var ethChartjs = document.getElementById("cust-chartjs").getContext("2d");
+    // Create Linear Gradient
+    var green_trans_gradient = ethChartjs.createLinearGradient(0, 0, 0, 100);
+    green_trans_gradient.addColorStop(0, 'rgba(10, 200, 30,0.4)');
+    green_trans_gradient.addColorStop(1, 'rgba(20,255,80,0)');
+    // Chart Options
+    var CUSTStats = {
+        responsive: true,
+        maintainAspectRatio: false,
+        datasetStrokeWidth : 3,
+        pointDotStrokeWidth : 4,
+        tooltipFillColor: "rgba(120, 144, 156,0.8)",
+        legend: {
+            display: false,
+        },
+        hover: {
+            mode: 'label'
+        },
+        scales: {
+            xAxes: [{
+                display: false,
+            }],
+            yAxes: [{
+                display: false,
+                ticks: {
+                    min: 0,
+                    max: 85
+                },
+            }]
+        },
+        title: {
+            display: false,
+            fontColor: "#FFF",
+            fullWidth: false,
+            fontSize: 30,
+            text: '52%'
+        }
+    };
+
+    // Chart Data
+    var CUSTMonthData = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        datasets: [{
+            label: "ETH",
+            data: [40, 30, 60, 40, 45, 30, 60],
+            backgroundColor: green_trans_gradient,
+            borderColor: "#78909C",
+            borderWidth: 1.5,
+            strokeColor : "#78909C",
+            pointRadius: 0,
+        }]
+    };
+
+    var ETHCardconfig = {
+        type: 'line',
+        // Chart Options
+        options : CUSTStats,
+        // Chart Data
+        data : CUSTMonthData
+    };
+
+    // Create the chart
+    var ETHAreaChart = new Chart(ethChartjs, ETHCardconfig);
+
+    /********************************************
     *               XRP Card                    *
     ********************************************/
     //Get the context of the Chart canvas element we want to select
@@ -261,7 +329,7 @@ $(window).on("load", function(){
                 // Setup grid
                 grid: {
                     x: 40,
-                    x2: 0,                    
+                    x2: 0,
                     borderColor: '#e3e3e3'
                 },
 
@@ -313,11 +381,11 @@ $(window).on("load", function(){
                         boundaryGap : true,
                         axisLine: {
                             lineStyle: {
-                                color: '#fff'                                
+                                color: '#fff'
                             }
                         },
                         axisTick: {onGap:false},
-                        splitLine: {show:false},                        
+                        splitLine: {show:false},
                         data : [
                             "2017/1/24", "2017/1/25", "2017/1/28", "2017/1/29", "2017/1/30",
                             "2017/1/31", "2017/2/1", "2017/2/4", "2017/2/5", "2017/2/6",
@@ -486,7 +554,7 @@ $(window).on("load", function(){
                             [2190.1,2148.35,2126.22,2190.1]
                         ],
                         markPoint : {
-                            symbol: 'star',                            
+                            symbol: 'star',
                             //symbolSize:20,
                             itemStyle:{
                                 normal:{label:{position:'top'}}

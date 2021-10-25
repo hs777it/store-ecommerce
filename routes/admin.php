@@ -15,17 +15,31 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+
+
 // Note that the Prefix is admin for all file route (outerServiceProvider)
-Route::group(['namespace' => 'Dashboard','middleware' => 'auth:admin'],function(){
+Route::group(['namespace' => 'Dashboard','middleware' => 'auth:admin','prefix'=>'admin'],function(){
 
     // the first page admin visits if authenticated
     Route::get('/','DashboardController@index') -> name('admin.dashboard');
 
+    Route::group(['prefix' => 'settings'],function (){
+       Route::get('shipping-method/{type}','SettingsController@editShippingMethod') -> name('edit.shipping.method');
+       Route::put('shipping-method/{id}','SettingsController@updateShippingMethod') -> name('update.shipping.method');
+    });
+
 });
 
-Route::group(['namespace' => 'Dashboard','middleware' => 'guest:admin'],function(){
+Route::group(['namespace' => 'Dashboard','middleware' => 'guest:admin','prefix'=>'admin'],function(){
 
     Route::get('login', 'LoginController@login')->name('admin.login');
     Route::post('login', 'LoginController@postLogin')->name('admin.post.login');
+
+});
 
 });
